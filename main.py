@@ -12,7 +12,6 @@ uri = 'https://toyokeizai.net/'
 category = 'category/weeklyranking'
 
 url = uri+category
-latest_post_date = "0"
 
 @retry(urllib.error.HTTPError, tries=5, delay=2, backoff=2)
 def soup_url(url):
@@ -96,7 +95,7 @@ def get_ranking(soup):
     return df
 
 
-def mail():
+def mail(latest_post_date):
     # メールの内容を作成
     msg = message.EmailMessage()
     msg.set_content('東洋経済 Ranking') # メールの本文
@@ -135,11 +134,11 @@ def main():
 
     with open("ToyoRankingBooks.csv",mode="w",encoding="cp932",errors="ignore")as f:
         TK_ranking_df.to_csv(f)
-    mail()
+    mail(latest_post_date)
 
     with open("ToyoRankingBooks.csv",mode="w",encoding="utf-8",errors="ignore")as f:
         TK_ranking_df.to_csv(f)
-    mail()
+    mail(latest_post_date)
 
 if __name__ == '__main__':
     main()

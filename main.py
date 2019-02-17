@@ -12,6 +12,7 @@ uri = 'https://toyokeizai.net/'
 category = 'category/weeklyranking'
 
 url = uri+category
+latest_post_date = 0
 
 @retry(urllib.error.HTTPError, tries=5, delay=2, backoff=2)
 def soup_url(url):

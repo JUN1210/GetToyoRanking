@@ -8,7 +8,6 @@ from email import message
 import smtplib
 import os
 
-#url = "https://www.amazon.co.jp/gp/top-sellers/books" の情報を取得する
 uri = 'https://toyokeizai.net/'
 category = 'category/weeklyranking'
 
@@ -99,8 +98,8 @@ def get_ranking(soup):
 def mail():
     # メールの内容を作成
     msg = message.EmailMessage()
-    msg.set_content('Amazon Ranking') # メールの本文
-    msg['Subject'] = 'Amazon top 100 Ranking' # 件名
+    msg.set_content('東洋経済 Ranking') # メールの本文
+    msg['Subject'] = '東洋経済 Ranking' + latest_post_date # 件名
     msg['From'] = from_email # メール送信元
     msg['To'] = to_email #メール送信先
     msg['Bcc'] = bcc_email #bcc送信先
